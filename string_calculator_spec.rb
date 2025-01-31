@@ -22,7 +22,7 @@ RSpec.describe StringCalculator do
         expect(calculator.add('1')).to eq(1)
       end
     end
-    
+
     context 'when input ends with a comma followed by a newline' do
       it 'raises an "input is invalid" exception' do
         expect { calculator.add("1,\n") }.to raise_error('input is invalid')
@@ -32,6 +32,12 @@ RSpec.describe StringCalculator do
     context 'when given numbers separated by commas and newlines' do
       it 'returns their sum' do
         expect(calculator.add("1\n2,3")).to eq(6)
+      end
+    end
+
+    context 'when the string contains a different delimiter' do
+      it 'handles a custom single-character delimiter' do
+        expect(calculator.add("//;\n1;2")).to eq(3)
       end
     end
   end
