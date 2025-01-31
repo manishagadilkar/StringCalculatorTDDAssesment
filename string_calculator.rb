@@ -5,6 +5,9 @@ class StringCalculator
 
     # Sum the numbers and return the result
     integer_digits.sum
+
+    # Check for invalid input where a number ends with a comma followed by a newline
+    raise 'input is invalid' if numbers.match?(/,\n|\n,/)
   end
 
   private
