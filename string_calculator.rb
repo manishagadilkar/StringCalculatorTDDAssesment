@@ -3,9 +3,6 @@ class StringCalculator
     # Return 0 for empty strings
     return 0 if numbers.empty?
 
-    # Sum the numbers and return the result
-    integer_digits.sum
-
     # Check for invalid input where a number ends with a comma followed by a newline
     raise 'input is invalid' if numbers.match?(/,\n|\n,/)
 
@@ -15,6 +12,15 @@ class StringCalculator
     else
       delimiter = /[,|\n]/
     end
+
+    # Split numbers by the provided delimiter(s)
+    digits = numbers.split(delimiter)
+
+    # Validate and convert string digits to integers
+    integer_digits = validate_and_convert(digits)
+
+    # Sum the numbers and return the result
+    integer_digits.sum
   end
 
   private
@@ -59,3 +65,7 @@ end
 # puts calculator.add('')          # Should output 0
 # puts calculator.add('1,5')       # Should output 6
 # puts calculator.add('1')         # Should output 1
+# puts calculator.add("1,\n")    # Uncommenting this line would raise the 'input is invalid' exception
+# puts calculator.add("1\n2,3")    # Should output 6
+# puts calculator.add("//;\n1;2")  # Should output 3
+# puts calculator.add('1,-2,-3')   # Should output negative numbers not allowed: -2, -3
